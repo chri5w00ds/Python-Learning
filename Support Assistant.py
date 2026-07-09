@@ -20,3 +20,5 @@ print(f"Urgency: {urgency}")
 print()
 
 print("Thank you, A support technician will review your issue soon.")
+
+print()
