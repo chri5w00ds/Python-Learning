@@ -16,28 +16,37 @@ device_names = {
 
 device_display = device_names.get(device.lower(), device.title())
 
-problem = input("What problem are you experiencing? ")
-priority = input("Rate the urgency as Low, Medium or High! ")
-priority = priority.lower()
+while True:
 
-while priority not in ["low", "medium", "high"]:
-    print("please enter Low, Medium or High. ")
+    problem = input("What problem are you experiencing? ")
     priority = input("Rate the urgency as Low, Medium or High! ")
     priority = priority.lower()
 
-print()
+    while priority not in ["low", "medium", "high"]:
+        print("please enter Low, Medium or High. ")
+        priority = input("Rate the urgency as Low, Medium or High! ")
+        priority = priority.lower()
 
-print("Support Summary")
-print("---------------")
+    print()
 
-print(f"Customer: {name.title()}")
-print(f"Device: {device_display}")
-print(f"Problem: {problem.title()}")
-print(f"priority: {priority.capitalize()}")
+    print("Support Summary")
+    print("---------------")
 
-if priority == "high":
-    print("This issue should be prioritised.")
-elif priority == "medium":
-    print("This issue should be handled soon.")
-else:
-    print("This issue can be scheduled for later.")
+    print(f"Customer: {name.title()}")
+    print(f"Device: {device_display}")
+    print(f"Problem: {problem.title()}")
+    print(f"priority: {priority.capitalize()}")
+
+    if priority == "high":
+        print("This issue should be prioritised.")
+    elif priority == "medium":
+        print("This issue should be handled soon.")
+    else:
+        print("This issue can be scheduled for later.")
+
+    with open("support_log.txt", "a") as file:
+        file.write(f"{name.title()}, {device_display}, {problem.capitalize()}, {priority.capitalize()}\n")
+
+    again = input("Would you like to log another issue? (Yes/No) ")
+    if again.lower() != "yes":
+        break
