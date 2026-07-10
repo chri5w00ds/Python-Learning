@@ -3,6 +3,7 @@ print("Welcome to your Support Assistant")
 print()
 
 name = input("What is your name? ")
+name = name.lower()
 device = input("What device are you using? ")
 
 device_names = {
@@ -15,6 +16,13 @@ device_names = {
 }
 
 device_display = device_names.get(device.lower(), device.title())
+
+try:
+    with open(f"{name}_{device_display}.txt", "r") as file:
+        contents = file.read()
+    print(f"Issues found:\n{contents}")
+except FileNotFoundError:
+    print("No issues logged yet. ")
 
 while True:
 
@@ -44,7 +52,7 @@ while True:
     else:
         print("This issue can be scheduled for later.")
 
-    with open("support_log.txt", "a") as file:
+    with open(f"{name}_{device_display}.txt", "a") as file:
         file.write(f"{name.title()}, {device_display}, {problem.capitalize()}, {priority.capitalize()}\n")
 
     again = input("Would you like to log another issue? (Yes/No) ")
