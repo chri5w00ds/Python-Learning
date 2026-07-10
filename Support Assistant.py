@@ -1,4 +1,4 @@
-print("Welcome to Chris's Support Assistant")
+print("Welcome to your Support Assistant")
 
 print()
 
