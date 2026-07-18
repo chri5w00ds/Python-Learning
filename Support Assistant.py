@@ -1,3 +1,9 @@
+import datetime
+import os
+folder_name = str(datetime.date.today())
+os.makedirs(folder_name, exist_ok=True)
+
+
 print("Welcome to your Support Assistant")
 
 print()
@@ -18,7 +24,7 @@ device_names = {
 device_display = device_names.get(device.lower(), device.title())
 
 try:
-    with open(f"{name}_{device_display}.txt", "r") as file:
+    with open(f"{folder_name}/{name}_{device_display}.txt", "r") as file:
         contents = file.read()
     print(f"Issues found:\n{contents}")
 except FileNotFoundError:
@@ -52,9 +58,11 @@ while True:
     else:
         print("This issue can be scheduled for later.")
 
-    with open(f"{name}_{device_display}.txt", "a") as file:
-        file.write(f"{name.title()}, {device_display}, {problem.capitalize()}, {priority.capitalize()}\n")
+    with open(f"{folder_name}/{name}_{device_display}.txt", "a") as file:
+        file.write(f"{name.title()}, {device_display}, {problem.capitalize()}, {priority.capitalize()}\n")        
 
     again = input("Would you like to log another issue? (Yes/No) ")
     if again.lower() != "yes":
         break
+
+print(folder_name)
